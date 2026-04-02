@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vaga Remota 2026 — Renda Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #060608;
+  --bg2: #0c0c10;
+  --bg3: #111116;
+  --verde: #00ff88;
+  --verde2: #00cc6a;
+  --rosa: #ff3366;
+  --borda: #1a1a22;
+  --texto: #e0ddd8;
+  --dim: #666672;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Syne', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--texto);
+  font-family: var(--sans);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* grain */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  opacity: 1;
+}
+* { position: relative; z-index: 1; }
+
+/* ── FASE 1: FORMULÁRIO ── */
+#fase1 {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 20px;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--verde);
+  background: rgba(0,255,136,.07);
+  border: 1px solid rgba(0,255,136,.2);
+  padding: 5px 14px;
+  display: inline-block;
+  margin-bottom: 28px;
+  text-transform: uppercase;
+}
+
+.f1-titulo {
+  font-size: clamp(30px, 7vw, 58px);
+  font-weight: 900;
+  line-height: 1.05;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 16px;
+  max-width: 600px;
+  letter-spacing: -1px;
+}
+.f1-titulo span { color: var(--verde); }
+
+.f1-sub {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--dim);
+  text-align: center;
+  margin-bottom: 40px;
+  line-height: 1.7;
+  max-width: 440px;
+}
+
+.form-box {
+  width: 100%;
+  max-width: 420px;
+  background: var(--bg2);
+  border: 1px solid var(--borda);
+  border-top: 2px solid var(--verde);
+  padding: 32px 28px;
+}
+
+.form-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--dim);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.form-input, .form-select {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--borda);
+  color: var(--texto);
+  font-family: var(--mono);
+  font-size: 14px;
+  padding: 14px 16px;
+  outline: none;
+  margin-bottom: 20px;
+  appearance: none;
+  transition: border-color .2s;
+}
+.form-input:focus, .form-select:focus { border-color: var(--verde); }
+.form-select { cursor: pointer; }
+
+.select-wrap { position: relative; margin-bottom: 20px; }
+.select-wrap::after {
+  content: '▾';
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  color: var(--dim); pointer-events: none; font-size: 14px;
+}
+.select-wrap .form-select { margin-bottom: 0; }
+
+.form-radio-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.radio-opt {
+  flex: 1;
+  background: var(--bg3);
+  border: 1px solid var(--borda);
+  padding: 12px 8px;
+  text-align: center;
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--dim);
+  transition: all .2s;
+  user-select: none;
+}
+.radio-opt.ativo {
+  border-color: var(--verde);
+  color: var(--verde);
+  background: rgba(0,255,136,.06);
+}
+
+.btn-form {
+  width: 100%;
+  background: var(--verde);
+  color: #000;
+  border: none;
+  font-family: var(--sans);
+  font-weight: 900;
+  font-size: 15px;
+  padding: 18px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: opacity .2s, transform .15s;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+.btn-form:hover { opacity: .88; transform: translateY(-1px); }
+
+.form-nota {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--dim);
+  text-align: center;
+  margin-top: 12px;
+  letter-spacing: 1px;
+}
+
+/* ── FASE 2: REVEAL ── */
+#fase2 {
+  display: none;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0;
+  opacity: 0;
+  animation: fadeIn .6s ease forwards;
+}
+#fase2.visivel { display: flex; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* aviso topo */
+.aviso-bar {
+  width: 100%;
+  background: var(--rosa);
+  padding: 14px 20px;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.reveal-inner {
+  max-width: 600px;
+  width: 100%;
+  padding: 52px 20px 60px;
+  text-align: center;
+}
+
+.sistema-tag {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 5px;
+  color: var(--rosa);
+  border: 1px solid rgba(255,51,102,.3);
+  background: rgba(255,51,102,.06);
+  padding: 5px 14px;
+  display: inline-block;
+  margin-bottom: 28px;
+  text-transform: uppercase;
+}
+
+.reveal-nome {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--dim);
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+}
+.reveal-nome span { color: var(--verde); font-weight: 700; }
+
+.reveal-titulo {
+  font-size: clamp(36px, 9vw, 72px);
+  font-weight: 900;
+  line-height: .95;
+  color: #fff;
+  margin-bottom: 8px;
+  letter-spacing: -2px;
+}
+.reveal-titulo .nao { color: var(--rosa); }
+
+.reveal-sub {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--dim);
+  margin-bottom: 48px;
+  line-height: 1.7;
+}
+
+/* blocos de valor */
+.valor-blocos {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 48px;
+  text-align: left;
+}
+
+.valor-item {
+  background: var(--bg2);
+  border: 1px solid var(--borda);
+  padding: 20px 24px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity .4s, transform .4s;
+}
+.valor-item.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+.valor-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.valor-text { font-size: 14px; line-height: 1.6; color: var(--texto); }
+.valor-text strong { color: var(--verde); }
+
+/* linha separadora estilo terminal */
+.terminal-line {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--dim);
+  text-align: left;
+  margin-bottom: 28px;
+  padding: 16px;
+  background: var(--bg2);
+  border-left: 2px solid var(--verde);
+  line-height: 1.8;
+}
+.terminal-line .cursor {
+  display: inline-block;
+  width: 8px; height: 14px;
+  background: var(--verde);
+  vertical-align: middle;
+  animation: blink-cur .8s step-end infinite;
+}
+@keyframes blink-cur { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* CTA final */
+.cta-section { text-align: center; }
+
+.cta-acima {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--dim);
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+}
+
+.btn-cta {
+  display: inline-block;
+  background: var(--verde);
+  color: #000;
+  font-family: var(--sans);
+  font-weight: 900;
+  font-size: clamp(14px, 3vw, 17px);
+  padding: 22px 44px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  box-shadow: 0 0 50px rgba(0,255,136,.25);
+  transition: transform .15s, box-shadow .15s;
+  animation: glow 2.5s ease-in-out infinite;
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+}
+@keyframes glow {
+  0%,100%{box-shadow:0 0 50px rgba(0,255,136,.25)}
+  50%{box-shadow:0 0 70px rgba(0,255,136,.45)}
+}
+.btn-cta:hover { transform: translateY(-2px); }
+.btn-cta small {
+  display: block;
+  font-size: 10px;
+  font-weight: 400;
+  opacity: .7;
+  margin-top: 5px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.cta-abaixo {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--dim);
+  margin-top: 14px;
+  letter-spacing: 1px;
+}
+
+/* ── RESPONSIVO ── */
+@media(max-width:480px){
+  .form-box { padding: 24px 16px; }
+  .reveal-inner { padding: 36px 16px 48px; }
+}
+
+/* animação entrada fase 1 */
+.fade-a { animation: fadeIn .5s ease both; }
+.fade-b { animation: fadeIn .5s .1s ease both; }
+.fade-c { animation: fadeIn .5s .2s ease both; }
+.fade-d { animation: fadeIn .5s .3s ease both; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════
+     FASE 1 — FORMULÁRIO
+══════════════════════════════════ -->
+<div id="fase1">
+  <div class="tag fade-a">Processo Seletivo · 2026</div>
+
+  <h1 class="f1-titulo fade-b">
+    Vaga Remota<br><span>Liberada.</span>
+  </h1>
+
+  <p class="f1-sub fade-c">
+    Remuneração variável de R$300 a R$1.000/dia.<br>
+    Modelo 100% remoto. Sem experiência prévia.
+  </p>
+
+  <div class="form-box fade-d">
+    <label class="form-label">Seu nome</label>
+    <input class="form-input" id="inp-nome" type="text" placeholder="Digite seu nome completo" autocomplete="off">
+
+    <label class="form-label">Área de interesse</label>
+    <div class="select-wrap">
+      <select class="form-select" id="inp-area">
+        <option value="">Selecione uma área</option>
+        <option>Vendas e Marketing</option>
+        <option>Atendimento Digital</option>
+        <option>Criação de Conteúdo</option>
+        <option>Gestão e Estratégia</option>
+        <option>Outra área</option>
+      </select>
+    </div>
+
+    <label class="form-label">Você já tentou ganhar dinheiro online?</label>
+    <div class="form-radio-group">
+      <div class="radio-opt" data-val="sim" onclick="selecionaRadio(this)">Sim</div>
+      <div class="radio-opt" data-val="nao" onclick="selecionaRadio(this)">Não</div>
+      <div class="radio-opt" data-val="tentou" onclick="selecionaRadio(this)">Tentei</div>
+    </div>
+
+    <button class="btn-form" onclick="revelar()">
+      ANALISAR MEU PERFIL AGORA
+    </button>
+    <p class="form-nota">🔒 Seus dados são confidenciais e protegidos</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     FASE 2 — REVEAL + VALOR
+══════════════════════════════════ -->
+<div id="fase2">
+  <div class="aviso-bar">⚠ &nbsp; AVISO IMPORTANTE DO SISTEMA &nbsp; ⚠</div>
+
+  <div class="reveal-inner">
+    <div class="sistema-tag">Resultado da análise</div>
+
+    <p class="reveal-nome">Olá, <span id="nome-display">candidato</span>.</p>
+
+    <h2 class="reveal-titulo">
+      <span class="nao">NÃO</span><br>ERA UMA<br>VAGA.
+    </h2>
+
+    <p class="reveal-sub">
+      Era um teste de mentalidade.<br>
+      E você passou — porque chegou até aqui.
+    </p>
+
+    <!-- BLOCOS DE VALOR -->
+    <div class="valor-blocos" id="blocos">
+
+      <div class="valor-item">
+        <span class="valor-icon">⚡</span>
+        <div class="valor-text">
+          Enquanto você procurava uma <strong>vaga</strong>, outras pessoas criaram sua própria estrutura e já estão faturando <strong>R$300 a R$1.000 por dia</strong> — sem patrão, sem salário fixo, sem CLT.
+        </div>
+      </div>
+
+      <div class="valor-item">
+        <span class="valor-icon">📱</span>
+        <div class="valor-text">
+          O método não exige produto próprio, experiência prévia ou aparecer pra ninguém. <strong>Só um celular e o processo certo.</strong>
+        </div>
+      </div>
+
+      <div class="valor-item">
+        <span class="valor-icon">🎯</span>
+        <div class="valor-text">
+          Mais de <strong>5.000 pessoas</strong> já aplicaram esse método e saíram de zero para resultados reais em menos de 7 dias. Com mentoria ao vivo, acompanhamento individual e estrutura pronta pra você usar agora.
+        </div>
+      </div>
+
+      <div class="valor-item">
+        <span class="valor-icon">🔑</span>
+        <div class="valor-text">
+          O jogo não é difícil. O jogo é <strong>desconhecido.</strong> Quem aprende as regras, vence. Quem fica esperando uma vaga aparecer, continua no mesmo lugar.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- LINHA TERMINAL -->
+    <div class="terminal-line">
+      <span style="color:var(--verde)">></span> análise_concluída.exe<br>
+      <span style="color:var(--verde)">></span> perfil: <span style="color:#fff">compatível com o método</span><br>
+      <span style="color:var(--verde)">></span> próximo_passo: <span style="color:var(--verde)">acesso_liberado</span> <span class="cursor"></span>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <p class="cta-acima">Sua vaga real está aqui</p>
+      <a href="https://kiwify.app/EGDVad5?afid=XKMGiwMT" class="btn-cta" id="btn-cta-main">
+        QUERO VER O MÉTODO COMPLETO
+        <small>Acesso imediato · Sem compromisso</small>
+      </a>
+      <p class="cta-abaixo">+ de 5.000 pessoas já mudaram de vida com isso</p>
+    </div>
+  </div>
+</div>
+
+<script>
+let radioSelecionado = '';
+
+function selecionaRadio(el) {
+  document.querySelectorAll('.radio-opt').forEach(r => r.classList.remove('ativo'));
+  el.classList.add('ativo');
+  radioSelecionado = el.dataset.val;
+}
+
+function revelar() {
+  const nome = document.getElementById('inp-nome').value.trim();
+  const area = document.getElementById('inp-area').value;
+
+  if (!nome) {
+    document.getElementById('inp-nome').focus();
+    document.getElementById('inp-nome').style.borderColor = 'var(--rosa)';
+    return;
+  }
+
+  // preenche nome no reveal
+  const primeiroNome = nome.split(' ')[0];
+  document.getElementById('nome-display').textContent = primeiroNome;
+
+  // esconde fase 1
+  document.getElementById('fase1').style.display = 'none';
+
+  // mostra fase 2
+  const f2 = document.getElementById('fase2');
+  f2.classList.add('visivel');
+
+  // anima blocos com delay
+  setTimeout(() => {
+    const blocos = document.querySelectorAll('.valor-item');
+    blocos.forEach((b, i) => {
+      setTimeout(() => b.classList.add('show'), i * 200);
+    });
+  }, 400);
+
+  // scroll pro topo
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // UTM pass-through
+  const params = new URLSearchParams(window.location.search);
+  const btn = document.getElementById('btn-cta-main');
+  const dest = new URL(btn.href);
+  ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(p => {
+    if (params.has(p)) dest.searchParams.set(p, params.get(p));
+  });
+  btn.href = dest.toString();
+}
+
+// enter no input
+document.getElementById('inp-nome').addEventListener('keydown', e => {
+  if (e.key === 'Enter') revelar();
+});
+</script>
+</body>
+</html>
